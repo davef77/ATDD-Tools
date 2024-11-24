@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class StubExternalKYCCheck implements ExternalKYCCheck {
-    private Set<String> validUsers = new HashSet<>();
+    private final Set<String> validUsers = new HashSet<>();
 
     void onVerifyApproveAccount(String account) {
         validUsers.add(account);

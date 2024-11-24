@@ -1,8 +1,7 @@
 package com.cd.acceptance.dsl;
 
 import java.util.*;
-
-import static junit.framework.TestCase.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Copyright (c) Continuous Delivery Ltd. 2024

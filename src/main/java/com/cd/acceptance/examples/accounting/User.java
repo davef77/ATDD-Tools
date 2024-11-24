@@ -1,9 +1,9 @@
 package com.cd.acceptance.examples.accounting;
 
 public class User {
-    private String name;
-    private String password;
-    private UserRole role;
+    private final String name;
+    private final String password;
+    private final UserRole role;
 
     public User(String name, String password, UserRole role) {
 

@@ -5,7 +5,7 @@ import com.cd.acceptance.examples.accounting.dsl.drivers.DummyAccountingSystemPr
 import com.cd.acceptance.examples.accounting.DummyAccountingSUT;
 import com.cd.acceptance.examples.accounting.dsl.drivers.KYCCheckProtocolDriver;
 import com.cd.acceptance.examples.accounting.dsl.drivers.StubExternalKYCCheck;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 public class Dsl {
     private final Params.DslContext context = new Params.DslContext();
@@ -13,7 +13,7 @@ public class Dsl {
     protected InvoicesDsl invoices;
     protected KycDsl kyc;
 
-    @Before
+    @BeforeEach
     public void setUp() {
 //        In reality the Protocol Driver would connect to the real "System Under Test"
 //        For the purpose of this example, we use a simple class to represent the SUT here.

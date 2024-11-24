@@ -1,15 +1,13 @@
 package com.cd.acceptance.examples.accounting;
 
 import com.cd.acceptance.examples.accounting.dsl.Dsl;
-import junit.framework.AssertionFailedError;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class InvoiceSubmissionAcceptanceTest extends Dsl {
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
     @Test
     public void shouldAcknowledgeInvoiceSubmission() {
         invoices.createAccount("name: InvoiceSubmitter1", "role: Submitter");
@@ -38,10 +36,10 @@ public class InvoiceSubmissionAcceptanceTest extends Dsl {
     public void shouldRejectInvoiceSubmissionForNoneSubmitterAccounts() throws AssertionFailedError {
         invoices.createAccount("name: NoneSubmitter1");
 
-        thrown.expect(AssertionFailedError.class);
-        thrown.expectMessage("User 'NoneSubmitter11' does not have permission to submit invoices");
+        AssertionFailedError e = assertThrows(AssertionFailedError.class, () ->
+                invoices.submitInvoice("name: NoneSubmitter1", "invoice: invoice1", "Item: Software License"));
 
-        invoices.submitInvoice("name: NoneSubmitter1", "invoice: invoice1", "Item: Software License");
+        assertEquals("User 'NoneSubmitter1' does not have permission to submit invoices", e.getMessage());
     }
 
 }

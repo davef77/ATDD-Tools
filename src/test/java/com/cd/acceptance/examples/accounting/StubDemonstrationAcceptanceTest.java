@@ -1,14 +1,13 @@
 package com.cd.acceptance.examples.accounting;
 
 import com.cd.acceptance.examples.accounting.dsl.Dsl;
-import junit.framework.AssertionFailedError;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StubDemonstrationAcceptanceTest extends Dsl {
-    @Rule public ExpectedException thrown = ExpectedException.none();
-
     @Test
     public void shouldAllowInvoiceSubmissionForApprovedAccounts() {
         kyc.approveAccount("name: InvoiceSubmitter1");
@@ -20,10 +19,9 @@ public class StubDemonstrationAcceptanceTest extends Dsl {
 
     @Test
     public void shouldRejectAccountCreationForAccountsRejectedByKyc() throws AssertionFailedError {
-        thrown.expect(AssertionFailedError.class);
-        thrown.expectMessage("Unable to create authorised account for: InvoiceSubmitter1");
-
-        invoices.createAccount("name: InvoiceSubmitter1", "role: Submitter", "kyc: Denied");
+        AssertionFailedError e = assertThrows(AssertionFailedError.class, () ->
+                invoices.createAccount("name: InvoiceSubmitter1", "role: Submitter", "kyc: Denied")) ;
+        assertEquals("Unable to create authorised account for: InvoiceSubmitter1", e.getMessage());
     }
 }
 

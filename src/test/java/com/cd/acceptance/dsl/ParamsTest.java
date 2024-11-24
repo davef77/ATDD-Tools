@@ -1,15 +1,16 @@
 package com.cd.acceptance.dsl;
 
-import junit.framework.AssertionFailedError;
-import org.junit.Before;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ParamsTest {
     private Params.DslContext context;
 
-    @Before
+    @BeforeEach
     public void setUp(){
         context = new Params.DslContext();
     }
@@ -82,10 +83,10 @@ public class ParamsTest {
 
         assertEquals("", params.decodeAlias("UnknonwnAlias"));
     }
-    @Test(expected = AssertionFailedError.class)
+    @Test()
     public void shouldFailAliasIfValueNotPresent() {
         Params params = new Params(context, new String[]{"name: nameTest"});
-        params.alias("name2");
+        assertThrows(AssertionFailedError.class, () -> params.alias("name2"));
     }
 
     @Test

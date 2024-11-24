@@ -5,13 +5,13 @@ import com.cd.acceptance.examples.accounting.*;
 
 import java.util.List;
 
-import static junit.framework.TestCase.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 // Pretend System Under Test
 public class DummyAccountingSystemProtocolDriver implements AccountingSystemProtocolDriver {
-    private Params.DslContext context;
+    private final Params.DslContext context;
     private final DummyAccountingSUT accountingSystem;
-    private StubExternalKYCCheck kycCheckDriver;
+    private final StubExternalKYCCheck kycCheckDriver;
 
     public DummyAccountingSystemProtocolDriver(Params.DslContext context, DummyAccountingSUT accountingSystem, StubExternalKYCCheck kycCheckDriver) {
         this.context = context;
@@ -38,7 +38,8 @@ public class DummyAccountingSystemProtocolDriver implements AccountingSystemProt
             Invoice invoice = new Invoice(invoiceName, purchaseOrder, invoiceNumber, items, total);
             accountingSystem.submitInvoice(userName, invoice);
         } catch (UserAccessDeniedException e) {
-            fail("User '" + userName + "' does not have permission to submit invoices");
+            Params params = new Params(context);
+            fail("User '" + params.decodeAlias(userName) + "' does not have permission to submit invoices");
         }
     }
 

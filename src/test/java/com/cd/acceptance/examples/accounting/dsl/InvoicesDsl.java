@@ -8,7 +8,7 @@ import java.util.List;
 public class InvoicesDsl {
     private final Params.DslContext context;
     private final AccountingSystemProtocolDriver driver;
-    private KycDsl kyc;
+    private final KycDsl kyc;
 
     protected InvoicesDsl(Params.DslContext context, AccountingSystemProtocolDriver driver, KycDsl kyc) {
         this.context = context;

@@ -1,8 +1,8 @@
 package com.cd.acceptance.examples.accounting;
 
 public class SubmittedInvoice {
-    private User user;
-    private Invoice invoice;
+    private final User user;
+    private final Invoice invoice;
 
     public SubmittedInvoice(User user, Invoice invoice) {
 

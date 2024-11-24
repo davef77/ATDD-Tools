@@ -1,7 +1,7 @@
 package com.cd.acceptance.examples.accounting.dsl.drivers;
 
 public class KYCCheckProtocolDriver {
-    private StubExternalKYCCheck kycCheck;
+    private final StubExternalKYCCheck kycCheck;
 
     public KYCCheckProtocolDriver(StubExternalKYCCheck kycCheck) {
         this.kycCheck = kycCheck;
