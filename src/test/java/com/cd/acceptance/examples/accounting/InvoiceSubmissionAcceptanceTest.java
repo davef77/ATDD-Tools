@@ -17,6 +17,17 @@ public class InvoiceSubmissionAcceptanceTest extends Dsl {
     }
 
     @Test
+    public void should() {
+
+        invoices.createAccount("name: Account1");
+
+        invoices.createAccount("name: Account2", "role: Submitter",
+                "kyc: Rejected", "password: fred1234");
+    }
+
+
+
+    @Test
     public void shouldSendSubmittedInvoiceToSupervisor() {
         invoices.createAccount("name: InvoiceSubmitter1", "role: Submitter");
         invoices.createAccount("name: Supervisor1", "role: AccountingSupervisor");

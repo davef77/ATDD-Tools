@@ -8,6 +8,7 @@ import org.opentest4j.AssertionFailedError;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParamsTest {
+    public static final String[] EMPTY_ARGS = new String[0];
     private Params.DslContext context;
 
     @BeforeEach
@@ -17,7 +18,7 @@ public class ParamsTest {
 
     @Test
     public void shouldReturnOptionalValueOfParam() {
-        Params params = new Params(context);
+        Params params = new Params(context, EMPTY_ARGS);
 
         assertEquals("3", params.optional("Three", "3"));
     }
@@ -56,7 +57,7 @@ public class ParamsTest {
         Params params = new Params(context, new String[]{"name: nameTest"});
         String aliasedName = params.alias("name");
 
-        assertNotEquals(aliasedName, "name");
+        assertNotEquals("name", aliasedName);
     }
 
     @Test
@@ -98,7 +99,7 @@ public class ParamsTest {
     }
 
     @Test
-    public void shouldSupplyIncrementedAliasAcrossContexts() {
+    public void shouldSupplyDifferentAliasForSameNameAcrossContexts() {
         Params params = new Params(context, new String[]{"name: nameTest"});
         Params.DslContext otherContext = new Params.DslContext();
         Params otherParams = new Params(otherContext, new String[]{"name: nameTest"});
